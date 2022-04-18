@@ -8,11 +8,11 @@ import os
 # database
 import mysql.connector
 
-cnx = mysql.connector.connect(user='doadmin', password='AVNS_IZcLYrdx6q27Ry2',
-                              host='db-mysql-sgp1-31144-do-user-11210025-0.b.db.ondigitalocean.com',
-                              port='25060'
-                              database='defaultdb')
-cnx.close()
+# cnx = mysql.connector.connect(user='doadmin', password='AVNS_IZcLYrdx6q27Ry2',
+#                               host='db-mysql-sgp1-31144-do-user-11210025-0.b.db.ondigitalocean.com',
+#                               port='25060'
+#                               database='defaultdb')
+# cnx.close()
 
 # import configparser
 
@@ -41,7 +41,7 @@ def main():
     dispatcher.add_handler(CommandHandler("add", add))
     dispatcher.add_handler(CommandHandler("help", help_command))
     dispatcher.add_handler(CommandHandler("hello", hello_command))
-    dispatcher.add_handler(CommandHandler("moive", movie_command))
+    dispatcher.add_handler(CommandHandler("movie", movie_command))
     # To start the bot:
     updater.start_polling()
     updater.idle()
@@ -81,6 +81,7 @@ def hello_command(update: Update, context: CallbackContext) -> None:
         update.message.reply_text('Usage: /hello <keyword>')
 
 def movie_command(update: Update, context: CallbackContext) -> None:
+    """Send a message when the command /movie is issued."""
     try:
          cnx = mysql.connector.connect(user='doadmin', password='AVNS_IZcLYrdx6q27Ry2',
                               host='db-mysql-sgp1-31144-do-user-11210025-0.b.db.ondigitalocean.com',
