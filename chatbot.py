@@ -82,30 +82,39 @@ def hello_command(update: Update, context: CallbackContext) -> None:
         update.message.reply_text('Usage: /hello <keyword>')
 
 def movie_command(update: Update, context: CallbackContext) -> None:
-    """Send a message when the command /movie is issued."""
-    try:
-         logging.info(context.args[0])
-         cnx = mysql.connector.connect(user='doadmin', password='AVNS_IZcLYrdx6q27Ry2',
-                              host='db-mysql-sgp1-31144-do-user-11210025-0.b.db.ondigitalocean.com',
-                              port='25060',
-                              database='defaultdb')
-         cursor = cnx.cursor()
-         print("Works well!1")
-         query = ("SELECT Title, Content FROM MOVIES " 
-         "WHERE Content =" + context.args[0])
-         print("Works well!2")
-         cursor.execute(query)
-         print("Works well!3")
-         for (title) in cursor:
-             update.message.reply_text("Movie: {}, Content:{}".format(title))
-             print("Works well!for")
-         cursor.close()
-
-         cnx.close()
-         print("Works well!end")
+    """Send a message when the command /hello is issued."""
+    try: 
+        logging.info(context.args[0])
+        msg = context.args[0]   # /hello keyword <-- this should store the keyword
+        update.message.reply_text('Good day, ' + msg + '!')
     except (IndexError, ValueError):
-        # User: Give me horor movie/ Shows me horor movie. User: /movie horor
         update.message.reply_text('Usage: /movie <keyword>')
+
+# def movie_command(update: Update, context: CallbackContext) -> None:
+#     """Send a message when the command /movie is issued."""
+#     try:
+#          logging.info(context.args[0])
+#          cnx = mysql.connector.connect(user='doadmin', password='AVNS_IZcLYrdx6q27Ry2',
+#                               host='db-mysql-sgp1-31144-do-user-11210025-0.b.db.ondigitalocean.com',
+#                               port='25060',
+#                               database='defaultdb')
+#          cursor = cnx.cursor()
+#          print("Works well!1")
+#          query = ("SELECT Title, Content FROM MOVIES " 
+#          "WHERE Content =" + context.args[0])
+#          print("Works well!2")
+#          cursor.execute(query)
+#          print("Works well!3")
+#          for (title) in cursor:
+#              update.message.reply_text("Movie: {}, Content:{}".format(title))
+#              print("Works well!for")
+#          cursor.close()
+
+#          cnx.close()
+#          print("Works well!end")
+#     except (IndexError, ValueError):
+#         # User: Give me horor movie/ Shows me horor movie. User: /movie horor
+#         update.message.reply_text('Usage: /movie <keyword>')
 
 # The code was done by Ruojie Hao (Student ID: 21415315).
 
