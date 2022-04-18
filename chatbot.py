@@ -29,21 +29,6 @@ def main():
     global redis1
     redis1 = redis.Redis(host=(os.environ['HOST']), password=(os.environ['PASSWORD']), port=(os.environ['REDISPORT']))
 
-    # server
-    cnx = mysql.connector.connect(user='doadmin', password='AVNS_IZcLYrdx6q27Ry2',
-        host='db-mysql-sgp1-31144-do-user-11210025-0.b.db.ondigitalocean.com',
-        port='25060',
-        database='defaultdb')
-    cursor = cnx.cursor()
-    query = ("SELECT Title, Content FROM MOVIES " 
-            "WHERE ID = " + "Horror")
-    cursor.execute(query)
-    for (title) in cursor:
-        update.message.reply_text("Movie: {}, Content:{}".format(title))
-        print("Works well!for")
-    cursor.close()
-    cnx.close()
-
     # You can set this logging module, so you will know when and why things do not work as expected
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                         level=logging.INFO)
@@ -57,7 +42,7 @@ def main():
     dispatcher.add_handler(CommandHandler("help", help_command))
     dispatcher.add_handler(CommandHandler("hello", hello_command))
     dispatcher.add_handler(CommandHandler("movie", movie_command))
-
+    
     # To start the bot:
     updater.start_polling()
     updater.idle()
@@ -99,12 +84,21 @@ def hello_command(update: Update, context: CallbackContext) -> None:
 def movie_command(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /movie is issued."""
     try:
+         cnx = mysql.connector.connect(user='doadmin', password='AVNS_IZcLYrdx6q27Ry2',
+                              host='db-mysql-sgp1-31144-do-user-11210025-0.b.db.ondigitalocean.com',
+                              port='25060',
+                              database='defaultdb')
+         cursor = cnx.cursor()
          print("Works well!1")
          query = ("SELECT Title, Content FROM MOVIES " 
-         "WHERE ID =" + context.args[0])
+         "WHERE Content =" + context.args[0])
          print("Works well!2")
          cursor.execute(query)
          print("Works well!3")
+         for (title) in cursor:
+             update.message.reply_text("Movie: {}, Content:{}".format(title))
+             print("Works well!for")
+         cursor.close()
 
          cnx.close()
          print("Works well!end")
