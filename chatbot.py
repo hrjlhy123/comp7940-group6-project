@@ -35,6 +35,14 @@ def main():
         port='25060',
         database='defaultdb')
     cursor = cnx.cursor()
+    query = ("SELECT Title, Content FROM MOVIES " 
+            "WHERE ID = " + "Horror")
+    cursor.execute(query)
+    for (title) in cursor:
+        update.message.reply_text("Movie: {}, Content:{}".format(title))
+        print("Works well!for")
+    cursor.close()
+    cnx.close()
 
     # You can set this logging module, so you will know when and why things do not work as expected
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -97,10 +105,6 @@ def movie_command(update: Update, context: CallbackContext) -> None:
          print("Works well!2")
          cursor.execute(query)
          print("Works well!3")
-         for (title) in cursor:
-             update.message.reply_text("Movie: {}, Content:{}".format(title))
-             print("Works well!for")
-         cursor.close()
 
          cnx.close()
          print("Works well!end")
