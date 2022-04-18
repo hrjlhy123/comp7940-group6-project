@@ -84,6 +84,7 @@ def hello_command(update: Update, context: CallbackContext) -> None:
 def movie_command(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /movie is issued."""
     try:
+         logging.info(context.args[0])
          cnx = mysql.connector.connect(user='doadmin', password='AVNS_IZcLYrdx6q27Ry2',
                               host='db-mysql-sgp1-31144-do-user-11210025-0.b.db.ondigitalocean.com',
                               port='25060',
