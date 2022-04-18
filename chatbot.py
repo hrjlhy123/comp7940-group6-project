@@ -5,6 +5,14 @@ import configparser
 import logging
 import redis
 import os
+# database
+import mysql.connector
+
+cnx = mysql.connector.connect(user='doadmin', password='AVNS_IZcLYrdx6q27Ry2',
+                              host='db-mysql-sgp1-31144-do-user-11210025-0.b.db.ondigitalocean.com',
+                              port='25060'
+                              database='defaultdb')
+cnx.close()
 
 # import configparser
 
