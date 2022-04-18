@@ -69,8 +69,15 @@ def add(update: Update, context: CallbackContext) -> None:
         update.message.reply_text('Usage: /add <keyword>')
 
 def help_command(update: Update, context: CallbackContext) -> None:
-    """Send a message when the command /help is issued."""
-    update.message.reply_text('Helping you helping you.')
+    # """Send a message when the command /help is issued."""
+    # update.message.reply_text('Helping you helping you.')
+    """Send a message when the command /hello is issued."""
+    try: 
+        logging.info(context.args[0])
+        msg = context.args[0]   # /hello keyword <-- this should store the keyword
+        update.message.reply_text('Good day, ' + msg + '!')
+    except (IndexError, ValueError):
+        update.message.reply_text('Usage: /movie <keyword>')
 
 def hello_command(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /hello is issued."""
