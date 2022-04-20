@@ -4,9 +4,9 @@ on: [push] # When pushing to any branch then run this action
 
 # Env variable
 env:
-  DOCKER_USER: ${{secrets.DOCKER_USER}}
-  DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-  REPO_NAME: ${{secrets.REPO_NAME}}
+  DOCKER_USER: 21415315
+  DOCKER_PASSWORD: 19940823Hrj_
+  REPO_NAME: 21415315/comp7940-group6-chatbot
 
 jobs:  
 
