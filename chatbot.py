@@ -141,7 +141,9 @@ def movie_reply_command(update, context):
     query = ("SELECT Title, Content FROM MOVIES WHERE Content ='" + update.callback_query.data +"'")
     cursor.execute(query)
     print("Works well!query")
-    update.callback_query.message.edit_text("I give you some idea, you can watch the movie: <{}>".format(cursor[0]))
+    for (i) in cursor:
+        update.callback_query.message.edit_text("I give you some idea, you can watch the movie: <{}>".format(i[0]))
+        break
     print("Works well!reply")
     cursor.close()
     cnx.close()
@@ -183,18 +185,22 @@ def movie_add_command(update: Update, context: CallbackContext) -> None:
                             host=db_host,
                             port=db_port,
                             database=db_db)
-        conn.enter_transaction_management()
+        #cnx.enter_transaction_management()
         cursor = cnx.cursor()
         print("cursor done")
         insertSql = ("INSERT INTO MOVIES (Title, Content) VALUES ('" + title + "', '" + content + "')")
         print(insertSql)
-        cursor.execute(insertSql)
-        cursor.commit()
-        print("execute")
-        for (i) in cursor:
-            update.message.reply_text("Movie has been successful added!")
-            update.message.reply_text("Title: {}, Content: {}".format(i[0], i[1]))
-            print("Title: {}, Content: {}".format(i[0], i[1]))
+        try:
+            cursor.execute(insertSql)
+            cnx.commit()
+            print("execute")
+            for (i) in cursor:
+                update.message.reply_text("Movie has been successful added!")
+                update.message.reply_text("Title: {}, Content: {}".format(i[0], i[1]))
+                print("Title: {}, Content: {}".format(i[0], i[1]))
+        except:
+            cnx.rollback()
+        
         #cursor.close()
         #cnx.close()
         print("Works well!end")
@@ -204,7 +210,8 @@ def movie_add_command(update: Update, context: CallbackContext) -> None:
     finally:
         if cursor:
             cursor.close()
-        conn.leave_transaction_management()
+        cnx.close()
+        #cnx.leave_transaction_management()
 
 # The code was done by Ruojie Hao (Student ID: 21415315).
 
