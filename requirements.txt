@@ -3,3 +3,4 @@ python-telegram-bot>=13.1
 configparser
 redis
 mysql-connector-python
+flask=2.0.2
