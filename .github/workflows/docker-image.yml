@@ -1,0 +1,27 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: docker login
+      env: 
+        DOCKER_USER:  ${{secrets.DOCKER_USERNAME}}
+        DOCKER_PASSWROD: ${{secrets.DOCKER_PASSWORD}}
+      run: 
+        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag 21415315/comp7940-group6-chatbot:$(date +%s)
+    
+    - name: Docker Push
+      run: docker push ${{secrets.DOCKER_USERNAME}}/21415315/comp7940-group6-chatbot
