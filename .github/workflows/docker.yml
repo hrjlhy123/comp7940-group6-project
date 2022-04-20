@@ -24,4 +24,4 @@ jobs:
       run: docker build . --file Dockerfile --tag 21415315/comp7940-group6-chatbot:$(date +%s)
       
     - name: Docker Push
-      run: docker push 21415315/comp7940-group6-chatbot
+      run: docker push comp7940-group6-chatbot
