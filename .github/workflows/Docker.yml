@@ -4,10 +4,10 @@ on: [push] # When pushing to any branch then run this action
 
 # Env variable
 env:
-  DOCKER_USER: ${{secrets.DOCKER_USER}}
-  DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-  REPO_NAME: ${{secrets.REPO_NAME}}
-
+  DOCKER_USER: 21415315 
+  DOCKER_PASSWORD: 19940823Hrj_
+  REPO_NAME: 21415315/comp7940-group6-chatbot
+  
 jobs:  
 
   push-image-to-docker-hub:  # job name    
@@ -28,4 +28,4 @@ jobs:
       run: docker build . --file Dockerfile --tag $DOCKER_USER/$REPO_NAME:${{ steps.date.outputs.date }}
 
     - name: Docker Push
-      run: docker push $DOCKER_USER/$REPO_NAME:${{ steps.date.outputs.date }}
+      run: docker push $REPO_NAME:${{ steps.date.outputs.date }}
