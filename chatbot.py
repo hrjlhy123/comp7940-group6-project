@@ -20,11 +20,17 @@ import mysql.connector
 global redis1
 
 #global db_user = os.environ['ACCESS_TOKEN']
-db_user = 'doadmin'
-db_psw = 'AVNS_IZcLYrdx6q27Ry2'
-db_host = 'db-mysql-sgp1-31144-do-user-11210025-0.b.db.ondigitalocean.com'
-db_port = '25060'
-db_db = 'defaultdb'
+#db_user = 'doadmin'
+#db_psw = 'AVNS_IZcLYrdx6q27Ry2'
+#db_host = 'db-mysql-sgp1-31144-do-user-11210025-0.b.db.ondigitalocean.com'
+#db_port = '25060'
+#db_db = 'defaultdb'
+
+db_user = os.environ['db_user']
+db_psw = os.environ['db_psw']
+db_host = os.environ['db_host']
+db_port = os.environ['db_port']
+db_db = os.environ['db_db']
 
 def main():
     # Load your token and create an Updater for your Bot
